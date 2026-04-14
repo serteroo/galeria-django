@@ -831,7 +831,10 @@ def login_view(request):
 @login_required(login_url='login')
 def galeria_view(request):
     fotos = Foto.objects.filter(activa=True)
-    return render(request, 'rrhh/galeria.html', {'fotos': fotos})
+    return render(request, 'rrhh/galeria.html', {
+        'fotos': fotos,
+        'total_fotos': fotos.count()
+    })
 
 
 @login_required(login_url='login')
