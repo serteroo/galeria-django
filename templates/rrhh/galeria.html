@@ -85,9 +85,8 @@
                 </button>
             </div>
 
-            <div class="info-box">
-                <h4>Total de fotos: {{ fotos|length }}</h4>
-                <p class="mb-0">Has iniciado sesión correctamente y ya estás dentro de la galería.</p>
+            <div class="alert alert-light text-center">
+                <strong>Total de fotos: {{ total_fotos }}</strong>
             </div>
         {% else %}
             <div class="alert alert-warning text-center">
