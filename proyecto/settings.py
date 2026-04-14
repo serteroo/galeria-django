@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
-
     "rest_framework",
     "core",
 ]
@@ -93,16 +92,9 @@ WSGI_APPLICATION = "proyecto.wsgi.application"
 # DB_HOST=127.0.0.1
 # DB_PORT=3306
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT", "3306"),
-        "OPTIONS": {
-            "charset": "utf8mb4",
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -143,9 +135,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # =========================
 # Login/Logout
 # =========================
-LOGIN_URL = reverse_lazy("login_page")
-LOGIN_REDIRECT_URL = "/dashboard/"
-LOGOUT_REDIRECT_URL = reverse_lazy("login_page")
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'galeria'
+LOGOUT_REDIRECT_URL = 'login'
 
 # =========================
 # Seguridad extra si no DEBUG

@@ -1,18 +1,23 @@
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-
-# Entornos virtuales
+# Entorno virtual
+env/
 venv/
-.venv/
 
-# Archivos sensibles
-.env
+# Python
+__pycache__/
+*.pyc
 
-# SQLite (solo si la usas local)
-*.sqlite3
+# Base de datos local
 db.sqlite3
 
-# VSCode
+# Archivos media (imágenes)
+media/
+
+# Variables de entorno
+.env
+
+# VS Code
 .vscode/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -287,3 +287,18 @@ class ZonaTrabajo(BaseModel):
 
     def __str__(self):
         return f"{self.nombre} - {self.area}"
+
+
+
+class Foto(models.Model):
+    titulo = models.CharField(max_length=150)
+    descripcion = models.TextField(blank=True, null=True)
+    imagen = models.ImageField(upload_to='galeria/')
+    fecha_subida = models.DateTimeField(auto_now_add=True)
+    activa = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-fecha_subida']
+
+    def __str__(self):
+        return self.titulo

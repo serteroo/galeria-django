@@ -25,6 +25,7 @@ from .models import (
     contrato,
     turno,
     cargo,
+    Foto,
 )
 from .forms import (
     EmpleadoZonaForm,
@@ -32,9 +33,12 @@ from .forms import (
     ContratoForm,
     CargoForm,
     PerfilForm,
+    LoginForm,
 )
 
 User = get_user_model()
+
+
 
 # ---------------------------
 # Helpers
@@ -808,3 +812,29 @@ def empleado_crear(request):
     )
 
     return JsonResponse({"ok": True, "id": emp.id})
+
+
+
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('galeria')
+
+    form = LoginForm(request, data=request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        login(request, form.get_user())
+        return redirect('galeria')
+
+    return render(request, 'rrhh/login.html', {'form': form})
+
+
+@login_required(login_url='login')
+def galeria_view(request):
+    fotos = Foto.objects.filter(activa=True)
+    return render(request, 'rrhh/galeria.html', {'fotos': fotos})
+
+
+@login_required(login_url='login')
+def logout_view(request):
+    logout(request)
+    return redirect('login')

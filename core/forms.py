@@ -1,7 +1,8 @@
 # core/forms.py
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import pago, contrato, ZonaTrabajo, empleado,cargo
+from .models import pago, contrato, ZonaTrabajo, empleado,cargo, Foto
+from django.contrib.auth.forms import AuthenticationForm
 
 class PagoForm(forms.ModelForm):
     class Meta:
@@ -100,4 +101,33 @@ class PerfilForm(forms.ModelForm):
             "first_name": forms.TextInput(attrs={"class": "form-control"}),
             "last_name": forms.TextInput(attrs={"class": "form-control"}),
             "email": forms.EmailInput(attrs={"class": "form-control"}),
+        }
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        label='Usuario',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingresa tu usuario'
+        })
+    )
+    password = forms.CharField(
+        label='Contraseña',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingresa tu contraseña'
+        })
+    )
+
+
+class FotoForm(forms.ModelForm):
+    class Meta:
+        model = Foto
+        fields = ['titulo', 'descripcion', 'imagen', 'activa']
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'imagen': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'activa': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }

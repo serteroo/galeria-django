@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     cargo, departamento, direccion, forma_pago, jornada, roles, turno,
-    empleado, cuenta_bancaria, contrato, liquidacion, pago, turno_has_jornada, ZonaTrabajo
+    empleado, cuenta_bancaria, contrato, liquidacion, pago, turno_has_jornada, ZonaTrabajo, Foto
 )
 from .forms import PagoForm
 from core.scoping import _get_employee_for_user, _apply_scope
@@ -234,6 +234,13 @@ class PagoAdmin(ScopedAdmin, BaseAdmin):
     list_ordering = ("-fecha_pago", "liquidacion__contrato__empleado__run")
     actions = [make_active, make_inactive]
     form = PagoForm
+
+
+@admin.register(Foto)
+class FotoAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'activa', 'fecha_subida')
+    list_filter = ('activa', 'fecha_subida')
+    search_fields = ('titulo', 'descripcion')
 
 
 

@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from core import views as v
 from django.contrib.auth import views as auth_views
 from core import views
@@ -11,6 +11,7 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('core.urls')),
 
     # Páginas
     path('', v.login_page, name='login_page'),
